@@ -1,14 +1,14 @@
-# Default values for ans-semaphore.
+# Default values for semaphore.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: semaphoreci/semaphore
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "2.8"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -35,6 +35,37 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+
+semaphore:
+  env:
+    db_type: mariadb
+    db_name: semaphore
+    db_user: semaphore
+    db_pass: semaphore
+    db_host: mariadb
+    db_port: 3306
+    secret_key: some-secret-key
+    admin_password: admin-password
+    admin_email: admin@example.com
+    admin_username: admin
+  service:
+    type: NodePort
+    port: 80
+    nodePort: 30000
+
+mariadb:
+  enabled: true
+  auth:
+    rootPassword: some-root-password
+  db:
+    name: semaphore
+    user: semaphore
+    password: semaphore
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
+      storageClass: standard
 
 service:
   type: ClusterIP
