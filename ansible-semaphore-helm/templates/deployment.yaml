@@ -31,11 +31,32 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.semaphore.image.repository }}:{{ .Values.semaphore.image.tag }}"
+          imagePullPolicy: {{ .Values.semaphore.image.pullPolicy }}
+          env:
+            - name: DB_TYPE
+              value: {{ .Values.semaphore.env.db_type }}
+            - name: DB_NAME
+              value: {{ .Values.semaphore.env.db_name }}
+            - name: DB_USER
+              value: {{ .Values.semaphore.env.db_user }}
+            - name: DB_PASS
+              value: {{ .Values.semaphore.env.db_pass }}
+            - name: DB_HOST
+              value: {{ .Values.semaphore.env.db_host }}
+            - name: DB_PORT
+              value: {{ .Values.semaphore.env.db_port }}
+            - name: SECRET_KEY
+              value: {{ .Values.semaphore.env.secret_key }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.semaphore.env.admin_password }}
+            - name: ADMIN_EMAIL
+              value: {{ .Values.semaphore.env.admin_email }}
+            - name: ADMIN_USERNAME
+              value: {{ .Values.semaphore.env.admin_username }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.semaphore.service.port }}
               protocol: TCP
           livenessProbe:
             httpGet:

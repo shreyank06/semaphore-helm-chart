@@ -56,8 +56,6 @@ semaphore:
     repository: "semaphoreci/semaphore"
     tag: "2.8"
 
-
-
 mariadb:
   enabled: true
   auth:
