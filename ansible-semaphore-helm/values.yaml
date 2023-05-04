@@ -42,7 +42,7 @@ semaphore:
     db_name: semaphore
     db_user: semaphore
     db_pass: semaphore
-    db_host: mariadb
+    db_host: db
     db_port: 3306
     secret_key: some-secret-key
     admin_password: admin-password
@@ -52,6 +52,11 @@ semaphore:
     type: NodePort
     port: 80
     nodePort: 30000
+  image:
+    repository: "semaphoreci/semaphore"
+    tag: "2.8"
+
+
 
 mariadb:
   enabled: true
