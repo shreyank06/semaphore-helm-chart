@@ -7,7 +7,7 @@ export POD_NAME=$(microk8s kubectl get pods --namespace default -l "app.kubernet
 export CONTAINER_PORT=$(microk8s kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
 microk8s kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
 ```
-Error
+Error after Visiting http://127.0.0.1:8080 
 ```
 (base) saparia@ngni-t14-cbl:~/Desktop/mariadb-semaphore-helm/ansible-semaphore/ansible-semaphore-helm$ microk8s kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
 Forwarding from 127.0.0.1:8080 -> 80
