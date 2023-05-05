@@ -45,7 +45,7 @@ spec:
             - name: DB_HOST
               value: {{ .Values.semaphore.env.db_host }}
             - name: DB_PORT
-              value: {{ .Values.semaphore.env.db_port }}
+              value: "{{ .Values.semaphore.env.db_port }}"
             - name: SECRET_KEY
               value: {{ .Values.semaphore.env.secret_key }}
             - name: ADMIN_PASSWORD
@@ -56,7 +56,7 @@ spec:
               value: {{ .Values.semaphore.env.admin_username }}
           ports:
             - name: http
-              containerPort: {{ .Values.semaphore.service.port }}
+              containerPort: "{{ .Values.semaphore.service.port }}"
               protocol: TCP
           livenessProbe:
             httpGet:
