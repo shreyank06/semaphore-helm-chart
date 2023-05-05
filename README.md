@@ -9,7 +9,6 @@ microk8s kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
 ```
 Error after Visiting http://127.0.0.1:8080 
 ```
-(base) saparia@ngni-t14-cbl:~/Desktop/mariadb-semaphore-helm/ansible-semaphore/ansible-semaphore-helm$ microk8s kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
 Forwarding from 127.0.0.1:8080 -> 80
 Forwarding from [::1]:8080 -> 80
 Handling connection for 8080
