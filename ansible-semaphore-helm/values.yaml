@@ -58,41 +58,6 @@ semaphore:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
 
-mariadb:
-  enabled: true
-  architecture: standalone
-  ## MariaDB Authentication parameters
-  ## @param mariadb.auth.rootPassword MariaDB root password
-  ## @param mariadb.auth.database MariaDB custom database
-  ## @param mariadb.auth.username MariaDB custom user name
-  ## @param mariadb.auth.password MariaDB custom user password
-  ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#setting-the-root-password-on-first-run
-  ##      https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-on-first-run
-  ##      https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-user-on-first-run
-  ##
-  auth:
-    rootPassword: ""
-    database: bitnami_wordpress
-    username: bn_wordpress
-    password: ""
-  ## MariaDB Primary configuration
-  ##
-  primary:
-    ## MariaDB Primary Persistence parameters
-    ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
-    ## @param mariadb.primary.persistence.enabled Enable persistence on MariaDB using PVC(s)
-    ## @param mariadb.primary.persistence.storageClass Persistent Volume storage class
-    ## @param mariadb.primary.persistence.accessModes [array] Persistent Volume access modes
-    ## @param mariadb.primary.persistence.size Persistent Volume size
-    ##
-    persistence:
-      enabled: true
-      storageClass: ""
-      accessModes:
-        - ReadWriteOnce
-      size: 8Gi
-
-
 service:
   type: ClusterIP
   port: 80
