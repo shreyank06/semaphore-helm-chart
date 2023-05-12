@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.sql.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.sql.name }}
+    project: {{ .Values.global.projectName }}
+spec:
+  replicas: {{ .Values.sql.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.sql.name }}
+      project: {{ .Values.global.projectName }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.sql.name }}
+        project: {{ .Values.global.projectName }}
+      {{- if .Values.sql.annotations }}
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '{{ .Values.sql.annotations | toPrettyJson }}'
+      {{- end }}        
+    spec:
+      volumes:
+        - name: {{ .Values.sql.volume.name }}
+          configMap:
+            name: {{ .Values.sql.configMapName }}
+      containers:
+        - name: {{ .Values.sql.name }}
+          volumeMounts:
+            - name: {{ .Values.sql.volume.name }}
+              mountPath: {{ .Values.sql.volume.path }}
+          image: "{{ .Values.sql.image.name }}:{{ .Values.sql.image.tag }}"
+          imagePullPolicy: {{ .Values.sql.image.pullPolicy }}
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root
+          - name: MYSQL_RANDOM_ROOT_PASSWORD
+            value: "{{ .Values.sql.environment.MYSQL_RANDOM_ROOT_PASSWORD }}"
+          - name: MYSQL_DATABASE
+            value: "{{ .Values.sql.environment.MYSQL_DATABASE }}"
+          - name: MYSQL_USER
+            value: "{{ .Values.sql.environment.MYSQL_USER }}"
+          - name: MYSQL_PASSWORD
+            value: "{{ .Values.sql.environment.MYSQL_PASSWORD }}"             
+          ports:
+            - name: sql
+              containerPort: 3306
+              protocol: TCP 
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.sql.configMapName }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.sql.name }}
+data: 
+  smf_db.sql: |-
+{{ .Files.Get "files/smf_db.sql" | indent 4}}
+
+  udm_db.sql: |-
+{{ .Files.Get "files/udm_db.sql" | indent 4}}
+
+  udr_db.sql: |-
+{{ .Files.Get "files/udr_db.sql" | indent 4}}
+
+  nssf_db.sql: |-
+{{ .Files.Get "files/nssf_db.sql" | indent 4}}

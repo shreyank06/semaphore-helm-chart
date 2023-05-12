@@ -34,59 +34,31 @@ spec:
           image: "{{ .Values.semaphore.image.repository }}:{{ .Values.semaphore.image.tag }}"
           imagePullPolicy: {{ .Values.semaphore.image.pullPolicy }}
           env:
-            - name: DB_TYPE
-              value: {{ .Values.semaphore.env.db_type }}
-            - name: DB_NAME
-              value: {{ .Values.semaphore.env.db_name }}
-            - name: DB_USER
-              value: {{ .Values.semaphore.env.db_user }}
-            - name: DB_PASS
-              value: {{ .Values.semaphore.env.db_pass }}
-            - name: DB_HOST
-              value: {{ .Values.semaphore.env.db_host }}
-            - name: DB_PORT
-              value: "{{ .Values.semaphore.env.db_port }}"
-            - name: SECRET_KEY
-              value: {{ .Values.semaphore.env.secret_key }}
-            - name: ADMIN_PASSWORD
-              value: {{ .Values.semaphore.env.admin_password }}
-            - name: ADMIN_EMAIL
-              value: {{ .Values.semaphore.env.admin_email }}
-            - name: ADMIN_USERNAME
-              value: {{ .Values.semaphore.env.admin_username }}
+            - name: SEMAPHORE_DB_DIALECT
+              value: {{ .Values.semaphore.env.SEMAPHORE_DB_DIALECT }}
+            - name: SEMAPHORE_DB
+              value: {{ .Values.semaphore.env.SEMAPHORE_DB }}
+            - name: SEMAPHORE_DB_USER
+              value: {{ .Values.semaphore.env.SEMAPHORE_DB_USER }}
+            - name: SEMAPHORE_DB_PASS
+              value: {{ .Values.semaphore.env.SEMAPHORE_DB_PASS }}
+            - name: SEMAPHORE_DB_HOST
+              value: {{ .Values.semaphore.env.SEMAPHORE_DB_HOST }}
+            - name: SEMAPHORE_DB_PORT
+              value: {{ .Values.semaphore.env.SEMAPHORE_DB_PORT | quote }}
             - name: SEMAPHORE_PLAYBOOK_PATH
               value: {{ .Values.semaphore.env.SEMAPHORE_PLAYBOOK_PATH }}
+            - name: SEMAPHORE_ADMIN_PASSWORD
+              value: {{ .Values.semaphore.env.SEMAPHORE_ADMIN_PASSWORD }}
+            - name: SEMAPHORE_ADMIN_EMAIL
+              value: {{ .Values.semaphore.env.SEMAPHORE_ADMIN_EMAIL }}
+            - name: SEMAPHORE_ADMIN_NAME
+              value: {{ .Values.semaphore.env.SEMAPHORE_ADMIN_NAME }}
+            - name: SEMAPHORE_ADMIN
+              value: {{ .Values.semaphore.env.SEMAPHORE_ADMIN }}
             - name: SEMAPHORE_ACCESS_KEY_ENCRYPTION
               value: {{ .Values.semaphore.env.SEMAPHORE_ACCESS_KEY_ENCRYPTION }}
-            - name: SEMAPHORE_LDAP_ACTIVATED
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_ACTIVATED }}
-            - name: SEMAPHORE_LDAP_HOST
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_HOST }}
-            - name: SEMAPHORE_LDAP_PORT
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_PORT }}
-            - name: SEMAPHORE_LDAP_NEEDTLS
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_NEEDTLS }}
-            - name: SEMAPHORE_LDAP_DN_BIND
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_DN_BIND }}
-            - name: SEMAPHORE_LDAP_PASSWORD
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_PASSWORD }}
-            - name: SEMAPHORE_LDAP_DN_SEARCH
-              value: {{- if eq .Values.semaphore.env.SEMAPHORE_LDAP_ACTIVATED "yes" }}
-            - name: SEMAPHORE_LDAP_DN_SEARCH
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_DN_SEARCH }}
-            - name: SEMAPHORE_LDAP_SEARCH_FILTER
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_SEARCH_FILTER }}
-            - name: SEMAPHORE_LDAP_HOST
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_HOST }}
-            - name: SEMAPHORE_LDAP_PORT
-              value: "{{ .Values.semaphore.env.SEMAPHORE_LDAP_PORT }}"
-            - name: SEMAPHORE_LDAP_NEEDTLS
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_NEEDTLS }}
-            - name: SEMAPHORE_LDAP_DN_BIND
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_DN_BIND }}
-            - name: SEMAPHORE_LDAP_PASSWORD
-              value: {{ .Values.semaphore.env.SEMAPHORE_LDAP_PASSWORD }}
-            {{- end }}
+
           ports:
             - name: http
               containerPort: {{ .Values.semaphore.service.port }}
