@@ -21,7 +21,6 @@ semaphore:
     SEMAPHORE_ADMIN_NAME: admin
     SEMAPHORE_ADMIN: admin
     SEMAPHORE_ACCESS_KEY_ENCRYPTION: gs72mPntFATGJs9qK0pQ0rKtfidlexiMjYCH9gWKhTU=
-
   service:
     type: NodePort
     port: 3000
@@ -31,9 +30,5 @@ semaphore:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
-
-service:
-  type: ClusterIP
-  port: 80
 
 
