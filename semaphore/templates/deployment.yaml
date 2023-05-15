@@ -52,19 +52,10 @@ spec:
               value: {{ .Values.semaphore.env.SEMAPHORE_ADMIN }}
             - name: SEMAPHORE_ACCESS_KEY_ENCRYPTION
               value: {{ .Values.semaphore.env.SEMAPHORE_ACCESS_KEY_ENCRYPTION }}
-
           ports:
             - name: http
               containerPort: {{ .Values.semaphore.service.port }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

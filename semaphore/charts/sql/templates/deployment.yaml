@@ -15,16 +15,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ .Values.sql.name }}
-        project: {{ .Values.global.projectName }}
-      {{- if .Values.sql.annotations }}
-      annotations:
-        k8s.v1.cni.cncf.io/networks: '{{ .Values.sql.annotations | toPrettyJson }}'
-      {{- end }}        
+        project: {{ .Values.global.projectName }}      
     spec:
       volumes:
         - name: {{ .Values.sql.volume.name }}
-          configMap:
-            name: {{ .Values.sql.configMapName }}
       containers:
         - name: {{ .Values.sql.name }}
           volumeMounts:
@@ -47,6 +41,14 @@ spec:
             - name: sql
               containerPort: 3306
               protocol: TCP 
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 3306
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 3306
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
