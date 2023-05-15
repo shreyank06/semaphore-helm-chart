@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ans-semaphore.fullname" . }}
+  name: {{ include "semaphore.fullname" . }}
   labels:
-    {{- include "ans-semaphore.labels" . | nindent 4 }}
+    {{- include "semaphore.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "ans-semaphore.selectorLabels" . | nindent 6 }}
+      {{- include "semaphore.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -15,7 +15,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "ans-semaphore.selectorLabels" . | nindent 8 }}
+        {{- include "semaphore.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

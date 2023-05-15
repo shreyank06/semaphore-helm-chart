@@ -1,5 +1,5 @@
 apiVersion: v2
-name: ans-semaphore
+name: semaphore
 description: A Helm chart for deploying ansible semaphore on kubernetes
 type: application
 version: 0.1.0
@@ -9,5 +9,5 @@ dependencies:
     version: 6.2.0
     condition: deploySQL
 maintainers:
-  - name: Hemant Zope
-    email: hemant.zope@fokus.fraunhofer.de
+  - name: Shreyank Saparia
+    email: shreyank.saparia@fokus.fraunhofer.de
