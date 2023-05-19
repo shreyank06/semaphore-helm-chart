@@ -36,8 +36,4 @@ ingress:
   # annotations:
   #   kubernetes.io/ingress.class: nginx
   tls: true
-  hosts:
-    - host: o5gc-semaphore
-      paths:
-      - path: /
-        pathType: Prefix
+

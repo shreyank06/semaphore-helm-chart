@@ -43,6 +43,14 @@ spec:
             - name: sql
               containerPort: 3306
               protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 3306
+          readinessProbe:
+            initialDelaySeconds: 5
+            tcpSocket:
+              port: 3306
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
