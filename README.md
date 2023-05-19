@@ -22,6 +22,3 @@ microk8s kubectl describe pods semaphore -n semaphore
 ```
 microk8s kubectl describe pods sql -n semaphore
 ```
-=======
-vist the url echoed
->>>>>>> a58c87b837678946e6b4851f8abfbcb770968553
