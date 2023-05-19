@@ -9,7 +9,7 @@ check the pods
 ```
 microk8s kubectl get pods -n semaphore 
 ```
-<<<<<<< HEAD
+
 if both sql and semaphore pods are running, get the url
 ```
 export NODE_IP=$(microk8s kubectl get nodes --namespace semaphore -o jsonpath="{.items[0].status.addresses[0].address}")
