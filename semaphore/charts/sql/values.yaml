@@ -1,26 +1,24 @@
 global:
   projectName: o5gc
 
-sql:
-  name: sql
-  configMapName: cm-sql
-  replicaCount: 1
-  service:
-    type: NodePort
+name: sql
+configMapName: cm-sql
+replicaCount: 1
+service:
+  type: NodePort
 #  nodeSelector:
 #    kubernetes.io/hostname: server1
-  volume:
-    name: config-volume
-    path: /docker-entrypoint-initdb.d
-  image:
-    name: mariadb
-    pullPolicy: IfNotPresent
-    tag: "10.3"
-  environment:
-    MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-    MYSQL_DATABASE: semaphore
-    MYSQL_USER: semaphore
-    MYSQL_PASSWORD: semaphore
-
-
-    
+volume:
+  name: config-volume
+  claimName: sql-data-pvc
+  storageSize: 10Gi
+  mountPath: /docker-entrypoint-initdb.d
+image:
+  name: mariadb
+  pullPolicy: IfNotPresent
+  tag: "10.3"
+environment:
+  MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+  MYSQL_DATABASE: semaphore
+  MYSQL_USER: semaphore
+  MYSQL_PASSWORD: semaphore

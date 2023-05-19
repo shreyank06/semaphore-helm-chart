@@ -7,27 +7,37 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-semaphore:
-  env:
-    SEMAPHORE_DB_DIALECT: mysql
-    SEMAPHORE_DB: semaphore
-    SEMAPHORE_DB_USER: semaphore
-    SEMAPHORE_DB_PASS: semaphore
-    SEMAPHORE_DB_HOST: sql.semaphore.svc.cluster.local
-    SEMAPHORE_DB_PORT: 3306
-    SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
-    SEMAPHORE_ADMIN_PASSWORD: admin-password
-    SEMAPHORE_ADMIN_EMAIL: admin@example.com
-    SEMAPHORE_ADMIN_NAME: admin
-    SEMAPHORE_ADMIN: admin
-    SEMAPHORE_ACCESS_KEY_ENCRYPTION: gs72mPntFATGJs9qK0pQ0rKtfidlexiMjYCH9gWKhTU=
-  service:
+
+env:
+  SEMAPHORE_DB_DIALECT: mysql
+  SEMAPHORE_DB: semaphore
+  SEMAPHORE_DB_USER: semaphore
+  SEMAPHORE_DB_PASS: semaphore
+  SEMAPHORE_DB_HOST: sql.semaphore.svc.cluster.local
+  SEMAPHORE_DB_PORT: 3306
+  SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+  SEMAPHORE_ADMIN_PASSWORD: admin-password
+  SEMAPHORE_ADMIN_EMAIL: admin@example.com
+  SEMAPHORE_ADMIN_NAME: admin
+  SEMAPHORE_ADMIN: admin
+  SEMAPHORE_ACCESS_KEY_ENCRYPTION: gs72mPntFATGJs9qK0pQ0rKtfidlexiMjYCH9gWKhTU=
+service:
     type: NodePort
     port: 3000
     nodePort: 30002
-  image:
-    repository: semaphoreui/semaphore
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "v2.8.90"
 
+image:
+  repository: semaphoreui/semaphore
+  pullPolicy: IfNotPresent
+  tag: "v2.8.90"
+
+ingress:
+  enabled: true
+  # annotations:
+  #   kubernetes.io/ingress.class: nginx
+  tls: true
+  hosts:
+    - host: o5gc-semaphore
+      paths:
+      - path: /
+        pathType: Prefix

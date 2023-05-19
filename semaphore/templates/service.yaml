@@ -5,14 +5,14 @@ metadata:
   labels:
     {{- include "semaphore.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.semaphore.service.type }}
+  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.semaphore.service.port }}
+    - port: {{ .Values.service.port }}
       targetPort: http
       protocol: TCP
       name: http
-      {{- if eq .Values.semaphore.service.type "NodePort" }}
-      nodePort: {{ .Values.semaphore.service.nodePort }}
+      {{- if eq .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort }}
       {{- end }}
   selector:
     {{- include "semaphore.selectorLabels" . | nindent 4 }}
