@@ -6,7 +6,4 @@ check the pods
 ```
 microk8s kubectl get pods -n semaphore 
 ```
-if both sql and semaphore pods are running, visit
-```
-https://o5gc-semaphore/
-```
+vist the url echoed
