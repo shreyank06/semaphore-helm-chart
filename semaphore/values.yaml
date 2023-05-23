@@ -13,7 +13,7 @@ env:
   SEMAPHORE_DB: semaphore
   SEMAPHORE_DB_USER: semaphore
   SEMAPHORE_DB_PASS: semaphore
-  SEMAPHORE_DB_HOST: sql.semaphore.svc.cluster.local
+  SEMAPHORE_DB_HOST: sql-mariadb.semaphore.svc.cluster.local
   SEMAPHORE_DB_PORT: 3306
   SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
   SEMAPHORE_ADMIN_PASSWORD: admin-password
@@ -21,6 +21,7 @@ env:
   SEMAPHORE_ADMIN_NAME: admin
   SEMAPHORE_ADMIN: admin
   SEMAPHORE_ACCESS_KEY_ENCRYPTION: gs72mPntFATGJs9qK0pQ0rKtfidlexiMjYCH9gWKhTU=
+
 service:
     type: NodePort
     port: 3000
@@ -36,4 +37,5 @@ ingress:
   # annotations:
   #   kubernetes.io/ingress.class: nginx
   tls: true
+
 

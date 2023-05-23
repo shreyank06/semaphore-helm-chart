@@ -1,9 +1,0 @@
-apiVersion: v2
-name: sql
-description: A Helm chart for deploying mariadb-server custom
-type: application
-version: 6.2.0
-appVersion: "6.2.0"
-maintainers:
-  - name: Hemant Zope
-    email: hemant.zope@fokus.fraunhofer.de
