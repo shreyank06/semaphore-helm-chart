@@ -13,8 +13,18 @@ spec:
       labels:
         {{- include "semaphore.selectorLabels" . | nindent 8 }}
     spec:
+      volumes:
+        - name: {{ .Values.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.volume.claimName }}
+      containers:
+        - name: {{ .Values.name }}
+          volumeMounts:
+            - name: {{ .Values.volume.name }}
+              mountPath: {{ .Values.volume.mountPath }}
+
       {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
+      imagePullSecrets:#
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
@@ -60,9 +70,10 @@ spec:
             initialDelaySeconds: 5
             httpGet:
               port: 3000
-
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
