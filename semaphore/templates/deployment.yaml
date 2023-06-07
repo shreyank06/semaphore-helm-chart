@@ -13,22 +13,19 @@ spec:
       labels:
         {{- include "semaphore.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
         - name: {{ .Values.volume.name }}
           persistentVolumeClaim:
             claimName: {{ .Values.volume.claimName }}
       containers:
-        - name: {{ .Values.name }}
+        - name: {{ .Chart.Name }}
           volumeMounts:
             - name: {{ .Values.volume.name }}
               mountPath: {{ .Values.volume.mountPath }}
-
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:#
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      containers:
-        - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
