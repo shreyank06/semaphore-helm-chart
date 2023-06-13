@@ -7,6 +7,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+
 env:
   SEMAPHORE_DB_DIALECT: mysql
   SEMAPHORE_DB: semaphore
@@ -36,10 +37,8 @@ ingress:
   tls: true
 
 volume:
-  name: config-volume
+  enabled: true
+  name: semaphore-pv
   claimName: semaphore-pvc
   storageSize: 1Gi
   mountPath: /mnt/data
-
-
-
