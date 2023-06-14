@@ -12,7 +12,7 @@ Get the url by running these commands
 ```
 
 if no mariadb tgz
-```
+
 ```
 microk8s helm install mariadb oci://registry-1.docker.io/bitnamicharts/mariadb \
   --namespace semaphore \
