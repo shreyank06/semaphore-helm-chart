@@ -1,6 +1,8 @@
 commands to run
+1 of these 2
 ```
 microk8s kubectl delete pvc data-mariadb-0 -n semaphore
+microk8s kubectl delete pvc data-semaphore-mariadb-0 -n semaphore
 ```
 ```
 microk8s helm install semaphore ./semaphore -n semaphore
