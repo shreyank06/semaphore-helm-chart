@@ -13,7 +13,7 @@ env:
   SEMAPHORE_DB: semaphore
   SEMAPHORE_DB_USER: semaphore
   SEMAPHORE_DB_PASS: semaphore
-  SEMAPHORE_DB_HOST: mariadb.semaphore.svc.cluster.local
+  SEMAPHORE_DB_HOST: semaphore-mariadb.semaphore.svc.cluster.local
   SEMAPHORE_DB_PORT: 3306
   SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
   SEMAPHORE_ADMIN_PASSWORD: admin-password
@@ -42,3 +42,42 @@ volume:
   claimName: semaphore-pvc
   storageSize: 1Gi
   mountPath: /mnt/data
+
+mariadb:
+  ## @param mariadb.enabled Deploy a MariaDB server to satisfy the applications database requirements
+  ## To use an external database set this to false and configure the `externalDatabase.*` parameters
+  ##
+  enabled: true
+  ## @param mariadb.architecture MariaDB architecture. Allowed values: `standalone` or `replication`
+  ##
+  architecture: standalone
+  ## MariaDB Authentication parameters
+  ## @param mariadb.auth.rootPassword MariaDB root password
+  ## @param mariadb.auth.database MariaDB custom database
+  ## @param mariadb.auth.username MariaDB custom user name
+  ## @param mariadb.auth.password MariaDB custom user password
+  ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#setting-the-root-password-on-first-run
+  ##      https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-on-first-run
+  ##      https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-user-on-first-run
+  ##
+  auth:
+    rootPassword: semaphore
+    database: semaphore
+    username: semaphore
+    password: semaphore
+  ## MariaDB Primary configuration
+  ##
+  primary:
+    ## MariaDB Primary Persistence parameters
+    ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+    ## @param mariadb.primary.persistence.enabled Enable persistence on MariaDB using PVC(s)
+    ## @param mariadb.primary.persistence.storageClass Persistent Volume storage class
+    ## @param mariadb.primary.persistence.accessModes [array] Persistent Volume access modes
+    ## @param mariadb.primary.persistence.size Persistent Volume size
+    ##
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 2Gi
