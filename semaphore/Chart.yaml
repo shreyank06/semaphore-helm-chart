@@ -4,10 +4,10 @@ description: A Helm chart for deploying ansible semaphore on kubernetes
 type: application
 version: 0.1.0
 appVersion: "1.16.0"
-# dependencies:
-# - name: mariadb
-#   repository: oci://registry-1.docker.io/bitnamicharts
-#   version: 12.2.4
+dependencies:
+- name: mariadb
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 12.2.4
 maintainers:
   - name: Shreyank Saparia
     email: shreyank.saparia@fokus.fraunhofer.de
