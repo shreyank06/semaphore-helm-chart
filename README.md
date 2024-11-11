@@ -1,3 +1,5 @@
+The project is a Helm chart designed to facilitate the deployment of Ansible Semaphore on Kubernetes clusters. Ansible Semaphore is a modern web interface for managing Ansible playbooks, providing a user-friendly platform for automation tasks.
+By leveraging Kubernetes' orchestration capabilities, the chart ensures scalable and reliable deployments of Ansible Semaphore.
 commands to run
 
 1 of these 2
